@@ -6,9 +6,26 @@ networks:
     attachable: true
 
 volumes:
-    prometheus: {}
-    grafana: {}
-    alertmanager: {}
+    prometheus:
+      driver: local
+      driver_opts:
+        o: bind
+        type: none
+        device: /srv/swarmprom/prometheus
+
+    grafana:
+      driver: local
+      driver_opts:
+        o: bind
+        type: none
+        device: /srv/swarmprom/grafana
+
+    alertmanager:
+      driver: local
+      driver_opts:
+        o: bind
+        type: none
+        device: /srv/swarmprom/grafana
 
 configs:
   caddy_config:
@@ -166,7 +183,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.role == manager
+          - node.hostname == bluefin
       resources:
         limits:
           memory: 2048M
