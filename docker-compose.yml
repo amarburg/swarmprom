@@ -25,7 +25,7 @@ volumes:
       driver_opts:
         o: bind
         type: none
-        device: /srv/swarmprom/grafana
+        device: /srv/swarmprom/alertmanager
 
 configs:
   caddy_config:
